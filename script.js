@@ -16,8 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
       colWidth: 100,
       clrDivQty: 2,
       colors: ['red', 'blue'],
-      clrPltSize: 20
+      clrPltSize: 20,
+      currentBrushColor: 'black',
     }
+
+
 
     console.log(api.gridContainer);
 
@@ -61,27 +64,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (let i = 0; i < api.clrDivQty; i++) {
       let div = document.createElement('div');
-      console.log(`${api.colors[i]}`);
       div.style.width = `${api.clrPltSize}px`;
       div.style.height = `${api.clrPltSize}px`;
       div.style.backgroundColor = `${api.colors[i]}`;
       api.clrPlt.appendChild(div);
+      console.log('new color added to color palette');
+
+      div.addEventListener('click', () => {
+        console.log(`color ${div.style.backgroundColor} has been selected... and saved to brush`);
+        api.currentBrushColor = div.style.backgroundColor;
+        console.log('brush color: ', api.currentBrushColor);
+      })
     }
   }
 
   main(createRows, createCol, colorPalette);
 
 
-
-
-
-  //   let rowWidth = row.style;
-  //   console.log(rowWidth);
-  //   console.log('size: ', rowWidth.cssText);
-  //
-  //   colorPalette();
-  // }
-  // console.log(container);
 
 
 
