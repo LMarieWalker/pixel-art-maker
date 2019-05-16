@@ -1,12 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-  function somethint() {
-    return somethinelse;
-  }
-
-
-
-  const main = (createRows, createCol, colorPalette) => {
+  
+  const main = (createRows, createCol, colorPalette, brushColor, removeOldColor) => {
     api = {
       gridContainer: document.querySelector('.gridContainer'),
       clrPlt: document.querySelector('.colorPalette'),
@@ -19,12 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
       currentBrushColor: 'black',
     }
 
-    console.log(api.gridContainer);
-
     createRows(api, createCol);
-    console.log('canvas created: ', api.gridContainer);
-    colorPalette(api);
-    console.log('color palette created: ', api.clrPlt);
+
+    colorPalette(api, brushColor, removeOldColor);
   }
 
   const createRows = (api, createCol) => {
@@ -35,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       createCol(api, row);
       api.gridContainer.appendChild(row);
-      console.log('done with createrows');
     }
   }
 
@@ -47,35 +37,49 @@ document.addEventListener('DOMContentLoaded', () => {
       row.appendChild(col);
 
       col.addEventListener('click', () => {
-        console.log('cell clicked... color changed to red');
         col.style.backgroundColor = 'red';
       })
-      console.log('event listner waiting for click on cell');
 
     }
-    console.log('done with create col... returning rows now');
     return row;
   }
 
-  const colorPalette = (api) => {
+  const colorPalette = (api, brushColor, removeOldColor) => {
 
     for (let i = 0; i < api.colors.length; i++) {
-      let div = document.createElement('div');
-      div.style.width = `${api.clrPltSize}px`;
-      div.style.height = `${api.clrPltSize}px`;
-      div.style.backgroundColor = `${api.colors[i]}`;
-      api.clrPlt.appendChild(div);
-      console.log('new color added to color palette');
+      let color = document.createElement('div');
+      color.style.width = `${api.clrPltSize}px`;
+      color.style.height = `${api.clrPltSize}px`;
+      color.style.backgroundColor = `${api.colors[i]}`;
+      api.clrPlt.appendChild(color);
 
-      div.addEventListener('click', () => {
-        console.log(`color ${div.style.backgroundColor} has been selected... and saved to brush`);
-        api.currentBrushColor = div.style.backgroundColor;
-        console.log('brush color: ', api.currentBrushColor);
+      color.addEventListener('click', () => {
+        api.currentBrushColor = color.style.backgroundColor;
+
+        brushColor(api, removeOldColor);
+
       })
     }
   }
 
-  main(createRows, createCol, colorPalette);
+  const brushColor = (api, removeOldColor) => {
+    let setColor = document.createElement('div');
+    setColor.style.width = `${api.clrPltSize * 2}px`;
+    setColor.style.height = `${api.clrPltSize * 2}px`;
+    setColor.className = 'brushColorIndicator';
+    setColor.style.backgroundColor = `${api.currentBrushColor}`;
+
+    removeOldColor(api);
+
+    api.clrPlt.appendChild(setColor);
+  }
+
+  const removeOldColor = (api) => {
+    let oldColor = document.querySelector('.brushColorIndicator')
+    oldColor.parentNode.removeChild(oldColor);
+  }
+
+  main(createRows, createCol, colorPalette, brushColor, removeOldColor);
 
 
 

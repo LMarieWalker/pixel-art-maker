@@ -20,7 +20,7 @@ Here's a development workflow that we recommend you use.
 1. **DONE** ~~Add an event listener to these `div` tags so when clicked the brush color is saved.~~
 1. **DONE** ~~Expand the dimensions of the pixel canvas.~~
 1. **DONE** ~~Expand the palette with more colors. (i.e. red, orange, yellow, green, blue, purple, brown, gray, black, white, etc.)~~
-1. Expand the palette with a brush color indicator.
+1. **DONE** ~~Expand the palette with a brush color indicator.~~
 1. Improve the look and feel of the canvas and color palette. Be careful not to break your program's behavior!
 
 **TIP:** Check out [this handy tool](http://www.colors.commutercreative.com/grid/) to see a list of all the named colors in CSS.
