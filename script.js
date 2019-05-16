@@ -1,60 +1,88 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  let container = document.querySelector('.container');
-  container.className += ' align-items-center shadow-lg bg-white rounded vh-100 vw-100';
-  let hi = document.createElement('h1');
-  hi.textContent = 'Pixel Art';
-  hi.className = 'row justify-content-center mb-5'
-  container.prepend(hi)
-
-  let gridContainer = document.createElement('div');
-  gridContainer.className = 'align-items-center';
-
-  let gridSizeRow = 2; // do not add more than 12
-  let gridSizeCol = 2; // do not add more than 12
-  let colSize = 12/gridSizeCol; // default grid layout size is 12
-  let offSet = 100; // the smaller this number the smaller the width
-  let percent = 100; // the smaller this number the bigger the height
-
-
-  for(let i = 0; i < gridSizeRow; i++) {
-    let row = document.createElement('div');
-    row.style.height = `${(gridSizeRow / (percent / 100)) + offSet}px`;
-    row.className = 'row justify-content-center';
+  function somethint() {
+    return somethinelse;
+  }
 
 
 
-    for(let j = 0; j < gridSizeCol; j++) {
+  const main = (createRows, createCol, colorPalette) => {
+    api = {
+      gridContainer: document.querySelector('.gridContainer'),
+      clrPlt: document.querySelector('.colorPalette'),
+      gridSizeRow: 2,
+      gridSizeCol: 2,
+      rowHeight: 100,
+      colWidth: 100,
+      clrDivQty: 2,
+      colors: ['red', 'blue'],
+      clrPltSize: 20
+    }
+
+    console.log(api.gridContainer);
+
+    createRows(api, createCol);
+    console.log('canvas created: ', api.gridContainer);
+    colorPalette(api);
+    console.log('color palette created: ', api.clrPlt);
+  }
+
+  const createRows = (api, createCol) => {
+    for(let i = 0; i < api.gridSizeRow; i++) {
+      let row = document.createElement('div');
+      row.style.height = `${api.rowHeight}px`;
+      row.className = 'row justify-content-center';
+
+      createCol(api, row);
+      api.gridContainer.appendChild(row);
+      console.log('done with createrows');
+    }
+  }
+
+  const createCol = (api, row) => {
+    for(let j = 0; j < api.gridSizeCol; j++) {
       let col = document.createElement('div');
-      col.style.width = `${(gridSizeRow / 0.50) + offSet}px`;
-      col.className = `m-0 p-0 border border-muted align-items-center`;
+      col.style.width = `${api.colWidth}px`;
+      col.className = `m-0 p-0 border border-danger align-items-center`;
       row.appendChild(col);
+
       col.addEventListener('click', () => {
+        console.log('cell clicked... color changed to red');
         col.style.backgroundColor = 'red';
       })
+      console.log('event listner waiting for click on cell');
+
     }
-
-
-
-    container.appendChild(row);
-    let rowWidth = row.style;
-    console.log(rowWidth);
-    console.log('size: ', rowWidth.cssText);
-    // constainer.appendChild(gridContainer);
-    colorPalette();
+    console.log('done with create col... returning rows now');
+    return row;
   }
-  console.log(container);
 
-  function colorPalette() {
-    let clrPlt = document.querySelector('.colorPalette');
-    let clrDivQty = 2;
-    let colors = ['red', 'blue'];
+  const colorPalette = (api) => {
 
-    for (let i = 0; i < clrDivQty; i++) {
-      let div = createElement('div');
-      div.style.backgroundColor = `${colors[i]}`;
-      clrPlt.appendChild(div);
+    for (let i = 0; i < api.clrDivQty; i++) {
+      let div = document.createElement('div');
+      console.log(`${api.colors[i]}`);
+      div.style.width = `${api.clrPltSize}px`;
+      div.style.height = `${api.clrPltSize}px`;
+      div.style.backgroundColor = `${api.colors[i]}`;
+      api.clrPlt.appendChild(div);
     }
   }
+
+  main(createRows, createCol, colorPalette);
+
+
+
+
+
+  //   let rowWidth = row.style;
+  //   console.log(rowWidth);
+  //   console.log('size: ', rowWidth.cssText);
+  //
+  //   colorPalette();
+  // }
+  // console.log(container);
+
+
 
 })
