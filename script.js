@@ -1,20 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-  
+
   const main = (createRows, createCol, colorPalette, brushColor, removeOldColor) => {
     api = {
       gridContainer: document.querySelector('.gridContainer'),
       clrPlt: document.querySelector('.colorPalette'),
-      gridSizeRow: 10,
-      gridSizeCol: 10,
-      rowHeight: 30,
-      colWidth: 30,
+      gridSizeRow: 15,
+      gridSizeCol: 15,
+      rowHeight: 20,
+      colWidth: 20,
       colors: ['red', 'blue', 'orange', 'yellow', 'green', 'purple', 'brown', 'gray', 'black', 'white'],
       clrPltSize: 20,
       currentBrushColor: 'black',
-    }
+    };
 
     createRows(api, createCol);
-
     colorPalette(api, brushColor, removeOldColor);
   }
 
@@ -27,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       createCol(api, row);
       api.gridContainer.appendChild(row);
     }
-  }
+  };
 
   const createCol = (api, row) => {
     for(let j = 0; j < api.gridSizeCol; j++) {
@@ -38,11 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       col.addEventListener('click', () => {
         col.style.backgroundColor = 'red';
-      })
-
+      });
     }
     return row;
-  }
+  };
 
   const colorPalette = (api, brushColor, removeOldColor) => {
 
@@ -55,34 +53,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
       color.addEventListener('click', () => {
         api.currentBrushColor = color.style.backgroundColor;
-
         brushColor(api, removeOldColor);
-
-      })
+      });
     }
-  }
+  };
 
   const brushColor = (api, removeOldColor) => {
     let setColor = document.createElement('div');
-    setColor.style.width = `${api.clrPltSize * 2}px`;
+    setColor.style.width = `${api.clrPltSize * 4}px`;
     setColor.style.height = `${api.clrPltSize * 2}px`;
-    setColor.className = 'brushColorIndicator';
+    setColor.className = 'brushColorIndicator rounded-pill';
     setColor.style.backgroundColor = `${api.currentBrushColor}`;
 
     removeOldColor(api);
-
     api.clrPlt.appendChild(setColor);
-  }
+  };
 
   const removeOldColor = (api) => {
     let oldColor = document.querySelector('.brushColorIndicator')
     oldColor.parentNode.removeChild(oldColor);
-  }
+  };
 
   main(createRows, createCol, colorPalette, brushColor, removeOldColor);
-
-
-
-
-
-})
+});
