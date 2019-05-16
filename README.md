@@ -18,8 +18,8 @@ Here's a development workflow that we recommend you use.
 1. **DONE** ~~Add an event listener to each `div` so when clicked the background turns red.~~
 1. **DONE** ~~Create a small palette of two colors (e.g. red and blue) below the canvas using more `div` tags.~~
 1. **DONE** ~~Add an event listener to these `div` tags so when clicked the brush color is saved.~~
-1. Expand the dimensions of the pixel canvas.
-1. Expand the palette with more colors. (i.e. red, orange, yellow, green, blue, purple, brown, gray, black, white, etc.)
+1. **DONE** ~~Expand the dimensions of the pixel canvas.~~
+1. **DONE** ~~Expand the palette with more colors. (i.e. red, orange, yellow, green, blue, purple, brown, gray, black, white, etc.)~~
 1. Expand the palette with a brush color indicator.
 1. Improve the look and feel of the canvas and color palette. Be careful not to break your program's behavior!
 

@@ -10,17 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
     api = {
       gridContainer: document.querySelector('.gridContainer'),
       clrPlt: document.querySelector('.colorPalette'),
-      gridSizeRow: 2,
-      gridSizeCol: 2,
-      rowHeight: 100,
-      colWidth: 100,
-      clrDivQty: 2,
-      colors: ['red', 'blue'],
+      gridSizeRow: 10,
+      gridSizeCol: 10,
+      rowHeight: 30,
+      colWidth: 30,
+      colors: ['red', 'blue', 'orange', 'yellow', 'green', 'purple', 'brown', 'gray', 'black', 'white'],
       clrPltSize: 20,
       currentBrushColor: 'black',
     }
-
-
 
     console.log(api.gridContainer);
 
@@ -62,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const colorPalette = (api) => {
 
-    for (let i = 0; i < api.clrDivQty; i++) {
+    for (let i = 0; i < api.colors.length; i++) {
       let div = document.createElement('div');
       div.style.width = `${api.clrPltSize}px`;
       div.style.height = `${api.clrPltSize}px`;
